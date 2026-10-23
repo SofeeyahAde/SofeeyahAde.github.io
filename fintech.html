@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fintech Credit Risk and Underwriting Optimization | Sofeeyah Adekunle</title><meta name="description" content="Credit risk analysis of 39,717 loans using MySQL and Power BI.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header><div class="w"><a class="logo" href="index.html"><span class="full">Sofeeyah Adekunle</span><span class="ini">SA</span></a><nav>
+<a href="index.html#work">Work</a><a href="index.html#skills">Skills</a><a href="index.html#experience">Experience</a><a href="index.html#contact">Contact</a><a class="cv" href="assets/Sofeeyah_Adekunle_Data_Analyst_Resume.pdf">CV</a></nav></div></header>
+
+<main class="cs"><div class="w"><div class="cs-hero"><a class="back" href="index.html#work">Back to projects</a>
+<span class="tag">Featured case study</span><h1 style="font-size:clamp(2rem,6vw,3.4rem)">Fintech Credit Risk and Underwriting Optimization</h1>
+<p class="lead">MySQL and Power BI analysis of 39,717 historical LendingClub loans to find where default risk concentrates and what a stricter underwriting rule would cost.</p>
+<div class="facts"><div><b>39,717</b><span>loans analysed</span></div><div><b>$445.6M</b><span>portfolio</span></div><div><b>$68.1M</b><span>charged off</span></div><div><b>19.1%</b><span>default rate, targeted segment</span></div></div>
+<a class="btn p" href="https://github.com/SofeeyahAde/fintech-credit-risk-analysis">View repository</a></div>
+<figure><button class="shot" aria-label="Enlarge: Power BI credit risk dashboard"><img src="assets/images/fintech-dashboard.jpg" alt="Power BI credit risk dashboard" loading="lazy"></button><figcaption>The Power BI dashboard: KPIs, default rate by loan tier, home ownership and verification status, and the underwriting scenario.</figcaption></figure>
+
+<h2>Business problem</h2><p>Digital lenders must balance loan growth against credit risk. I set out to answer five questions that support underwriting decisions:</p>
+<ol><li>Do larger loans show higher observed default rates?</li><li>How does housing status relate to risk and exposure?</li><li>How much loan amount is associated with Charged Off records?</li><li>How do default rates differ by verification status?</li><li>What is the historical trade-off of restricting renters who request $20,000 or more?</li></ol>
+
+<h2>Approach</h2><p>I profiled the data in MySQL first (record counts, duplicate IDs, missing values, categories), then grouped loans into tiers: Small up to $10,000, Medium up to $20,000 and High above that. Each question was answered with a documented query, and Charged Off was treated as the default outcome.</p>
+<figure><button class="shot" aria-label="Enlarge: SQL query that tiers loans by size and calculates default rate"><img src="assets/images/fintech-sql.jpg" alt="SQL query that tiers loans by size and calculates default rate" loading="lazy"></button><figcaption>Business Question 1: a CTE assigns each loan a size tier, then default rate is calculated per tier.</figcaption></figure>
+
+<h2>Key findings</h2>
+<div class="find"><b>Default rises with loan size</b><p>13.12% for small loans, about 14.36% for medium and about 18.76% for high.</p></div>
+<div class="find"><b>Housing shows different risk and exposure</b><p>Mortgage borrowers have the lowest default rate (13.18%) but more than $224M of exposure. Renters default at 15.02% with a large share of volume.</p></div>
+<div class="find"><b>About $68.11M is tied to charged-off loans</b><p>Roughly 15.3% of the total loan amount. This is not the same as final accounting loss, since recoveries and fees are not included.</p></div>
+<div class="find"><b>Verified loans defaulted more, not less</b><p>16.01% for verified loans against 12.66% for not verified. This is an association, possibly caused by verification being applied to riskier applicants.</p></div>
+<div class="find"><b>The renter segment asking for $20K+ is risky, but a ban has a cost</b><p>Its historical default rate is 19.14% (401 charged-off loans, about $9.88M). The same segment holds 1,571 fully paid and 123 current loans worth about $40.6M that a blanket ban would also block.</p></div>
+
+<h2>Recommendations</h2><ul><li>Apply stronger risk controls to larger loan requests.</li><li>Test targeted measures for the renter and $20K+ segment, such as risk-based limits, pricing or extra verification, before a blanket restriction.</li><li>Investigate why verified loans default more often.</li><li>Monitor both default rate and financial exposure, because they measure different risks.</li></ul>
+
+<h2>Limitations</h2><ul><li>Historical, observational data: it shows associations, not causes.</li><li>Charged Off is a proxy for default, and the charged-off amount is not final accounting loss.</li><li>The underwriting scenario is a historical simulation, not a predictive model.</li><li>Current and Fully Paid amounts are not guaranteed future revenue.</li></ul>
+
+<h2>Tools</h2><div class="chips"><span>MySQL</span><span>MySQL Workbench</span><span>SQL</span><span>Power BI</span><span>DAX</span></div>
+<div class="nav2"><a href="index.html#work">Back to all projects</a><a href="healthcare.html">Next: Healthcare case study</a></div>
+</div></main><footer><div class="w">© Sofeeyah Adekunle. Lagos, Nigeria.</div></footer>
+<dialog id="z"><img alt=""></dialog><script src="assets/site.js"></script></body></html>
