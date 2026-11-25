@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traffic Accident Analysis | Sofeeyah Adekunle</title><meta name="description" content="MySQL and Power BI analysis of 209,275 traffic crash records: which weather, lighting and road conditions carry the highest injury risk per crash.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header><div class="w"><a class="logo" href="index.html"><span class="full">Sofeeyah Adekunle</span><span class="ini">SA</span></a><nav>
+<a href="index.html#work">Work</a><a href="index.html#skills">Skills</a><a href="index.html#experience">Experience</a><a href="index.html#contact">Contact</a><a class="cv" href="assets/Sofeeyah_Adekunle_Data_Analyst_Resume.pdf">CV</a></nav></div></header>
+
+<main class="cs"><div class="w"><div class="cs-hero"><a class="back" href="index.html#work">Back to projects</a>
+<h1 style="font-size:clamp(2rem,6vw,3.4rem)">Traffic Accident Analysis</h1><p class="lead">MySQL and Power BI analysis of which weather, lighting and road conditions carry the highest injury risk per crash, comparing rates and not just counts.</p><div class="facts"><div><b>209,275</b><span>crashes analysed</span></div><div><b>49.3</b><span>incapacitating injuries per 1,000 crashes, lighted darkness (34.0 in daylight)</span></div><div><b>41.2</b><span>injuries per 100 crashes in rain (38.3 overall)</span></div><div><b>26.7%</b><span>dry-road crashes, cause unknown</span></div></div><a class="btn p" href="https://github.com/SofeeyahAde/traffic-accident-analysis">View repository</a></div>
+<figure><button class="shot" aria-label="Enlarge: Power BI traffic crash dashboard"><img src="assets/images/traffic-dashboard.jpg" alt="Power BI traffic crash dashboard" loading="lazy"></button><figcaption>The Power BI dashboard: injury rates by weather, lighting and road surface, and the primary causes of dry-road crashes.</figcaption></figure>
+
+<h2>Business problem</h2><p>Which weather, lighting and road conditions carry the highest injury risk per crash, and where should a city transport agency focus safety measures first? Raw injury counts can mislead, because most driving happens in clear weather, daylight and on dry roads, so those conditions dominate the totals. I therefore compared injury rates per crash, and only ranked conditions with at least 1,000 crashes.</p>
+
+<h2>Data preparation</h2><p>In MySQL I inspected the table, removed 31 duplicate records (209,306 down to 209,275), reviewed unknown values in key fields and prepared the date fields. The data covers 2013 to 2025. Injury rate is injuries per 100 crashes, and incapacitating rate is incapacitating injuries per 1,000 crashes. The cleaning and analysis scripts are in the repository.</p>
+<!-- TODO: add one sentence on where the data comes from (source, city or agency, link), then delete this comment. -->
+
+<h2>Questions</h2>
+<p><b>Main questions</b></p>
+<ol><li>Which weather condition has the highest injury rate per 100 crashes?</li><li>Which lighting condition has the highest incapacitating rate per 1,000 crashes?</li><li>How do injury rates differ by road surface?</li><li>What share of dry-road crashes have no determined cause?</li></ol>
+<p><b>Supporting questions (counts)</b></p>
+<ol start="5"><li>Which weather condition has the highest total injuries?</li><li>Which lighting condition has the highest and lowest incapacitating injuries?</li><li>Which road surface has the most crashes, and what is its most common cause?</li><li>What is the most common first crash type, and when does the most common crash type peak and dip?</li></ol>
+<figure><button class="shot" aria-label="Enlarge: SQL query for roadway surface and most common contributory cause"><img src="assets/images/traffic-sql.jpg" alt="SQL query for roadway surface and most common contributory cause" loading="lazy"></button><figcaption>Supporting question: two CTEs find the road surface with the most crashes, then its most common primary cause.</figcaption></figure>
+
+<h2>Key findings</h2>
+<div class="find"><b>Lighted darkness has the highest incapacitating rate</b><p>Darkness on a lighted road records 49.3 incapacitating injuries per 1,000 crashes, against 34.0 in daylight, roughly 45% higher. Darkness without lighting (45.3) and dawn (43.8) are also above daylight. Daylight has the most incapacitating injuries (4,557) only because about 64% of crashes happen in daylight. Darkness on a lighted road is slightly higher than on an unlit road, and I have not tested why.</p></div>
+<div class="find"><b>Clear weather has the most injuries, but rain has the highest rate</b><p>Clear weather accounts for about 78.7% of crashes and 80.3% of injuries. Per 100 crashes, rain is highest among conditions with at least 1,000 crashes at 41.2, against 39.0 for clear weather and 38.3 overall. The gap is modest, so rain is a signal to investigate, not proof of a large effect. Snow is lower than clear weather (30.8), so severe-looking conditions do not automatically mean more injuries per crash.</p></div>
+<div class="find"><b>Road surface makes little difference</b><p>Dry roads record 39.6 injuries per 100 crashes and wet roads 41.3. Wet roads have a lower incapacitating rate than dry roads (37.7 against 40.5 per 1,000 crashes). Snowy and icy roads show lower rates per crash, and I have not tested why.</p></div>
+<div class="find"><b>A quarter of dry-road crashes have no determined cause</b><p>Dry roads have the most crashes, and 41,610 of them (26.7%) are recorded as Unable to determine. That is a data-quality gap, not a cause. Categories recorded as Unknown also show much lower injury rates, which may reflect incomplete recording and not safer conditions.</p></div>
+<div class="find"><b>Supporting observations</b><p>Turning is the most common first crash type: about 64,150 crashes, or 30.7% of the total. The most common crash type, No injury or drive away, peaks in October (11,136) and dips in April (8,463). Month length and the years covered affect these counts, and 2025 is a partial year.</p></div>
+
+<h2>Recommendations</h2><ol><li>Prioritise low-light conditions, especially darkness on lighted roads, where the incapacitating rate per crash is roughly 30% to 45% above daylight.</li><li>Treat rain as a secondary focus, since its gap over clear weather is small.</li><li>Improve how crash causes are recorded, and check whether Unknown categories reflect missing injury data.</li><li>Investigate turning crashes, because Turning is the most common first crash type.</li></ol>
+
+<h2>Limitations</h2><ul><li>Observational data: it shows associations, not causes.</li><li>No traffic-volume figures, so rates per vehicle or per mile cannot be calculated. The rates here are per crash.</li><li>2013 and 2025 are partial years, so annual and monthly comparisons may be affected.</li><li>Only conditions with at least 1,000 crashes are ranked. Unknown categories and small categories should not be over-interpreted.</li></ul>
+
+<h2>Tools</h2><div class="chips"><span>MySQL</span><span>MySQL Workbench</span><span>SQL</span><span>Power BI</span><span>DAX</span></div>
+<div class="nav2"><a href="healthcare.html">Previous: Healthcare case study</a><a href="index.html#work">Back to all projects</a></div></div></main><footer><div class="w">© Sofeeyah Adekunle. Lagos, Nigeria.</div></footer>
+<dialog id="z"><img alt=""></dialog><script src="assets/site.js"></script></body></html>
